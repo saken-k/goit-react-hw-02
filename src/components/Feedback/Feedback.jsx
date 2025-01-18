@@ -3,7 +3,7 @@ import css from './Feedback.module.css';
 const Feedback = ({ totalFeedback, feedbackType, positivePercentage }) => {
   return (
     <div className={css.feedback}>
-      {totalFeedback > 0 ? (
+      {totalFeedback > 0 && (
         <ul>
           <li>Good: {feedbackType.good} </li>
           <li>Neutral: {feedbackType.neutral} </li>
@@ -11,8 +11,6 @@ const Feedback = ({ totalFeedback, feedbackType, positivePercentage }) => {
           <li>Total: {totalFeedback} </li>
           <li>Positive: {positivePercentage} </li>
         </ul>
-      ) : (
-        'No feedback yet'
       )}
     </div>
   );

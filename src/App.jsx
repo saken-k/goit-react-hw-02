@@ -3,6 +3,7 @@ import './App.css';
 import Description from './components/Description/Description';
 import Option from './components/Options/Options';
 import Feedback from './components/Feedback/Feedback';
+import Notification from './components/Notification/Notification';
 
 function App() {
   const [feedbackType, setFeedbackType] = useState(() => {
@@ -58,6 +59,7 @@ function App() {
         feedbackType={feedbackType}
         resetFeedback={resetFeedback}
       />
+      <Notification totalFeedback={totalFeedback} />
       <Feedback
         totalFeedback={totalFeedback}
         feedbackType={feedbackType}
