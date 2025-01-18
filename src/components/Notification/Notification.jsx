@@ -1,9 +1,9 @@
 import css from './Notification.module.css';
 
-const Notification = ({ totalFeedback }) => {
+const Notification = () => {
   return (
     <div className={css.notification}>
-      {totalFeedback == 0 && <p>No feedback yet</p>}
+      <p>No feedback yet</p>
     </div>
   );
 };

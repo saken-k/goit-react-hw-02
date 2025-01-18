@@ -59,7 +59,7 @@ function App() {
         feedbackType={feedbackType}
         resetFeedback={resetFeedback}
       />
-      <Notification totalFeedback={totalFeedback} />
+      {totalFeedback == 0 && <Notification totalFeedback={totalFeedback} />}
       <Feedback
         totalFeedback={totalFeedback}
         feedbackType={feedbackType}
