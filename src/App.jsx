@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Description from './components/Description/Description';
 import Option from './components/Options/Options';
@@ -36,19 +36,29 @@ function App() {
     }));
   };
 
-  const totalFeedback =
-    feedbackType.good + feedbackType.neutral + feedbackType.bad;
-  const positivePercentage =
-    totalFeedback > 0
-      ? Math.round((feedbackType.good / totalFeedback) * 100)
-      : 0;
+  const totalFeedback = useMemo(
+    () => feedbackType.good + feedbackType.neutral + feedbackType.bad,
+    [feedbackType]
+  );
+
+  const positivePercentage = useMemo(
+    () =>
+      totalFeedback > 0
+        ? Math.round((feedbackType.good / totalFeedback) * 100)
+        : 0,
+    [feedbackType, totalFeedback]
+  );
 
   const resetFeedback = () => {
     setFeedbackType({ good: 0, neutral: 0, bad: 0 });
   };
 
   useEffect(() => {
-    localStorage.setItem('feedbackType', JSON.stringify(feedbackType));
+    const saveData = setTimeout(() => {
+      localStorage.setItem('feedbackType', JSON.stringify(feedbackType));
+    }, 300);
+
+    return () => clearTimeout(saveData);
   }, [feedbackType]);
 
   return (
@@ -59,8 +69,9 @@ function App() {
         feedbackType={feedbackType}
         resetFeedback={resetFeedback}
       />
-      {totalFeedback == 0 && <Notification />}
-      {totalFeedback > 0 && (
+      {totalFeedback === 0 ? (
+        <Notification />
+      ) : (
         <Feedback
           totalFeedback={totalFeedback}
           feedbackType={feedbackType}
