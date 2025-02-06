@@ -60,11 +60,13 @@ function App() {
         resetFeedback={resetFeedback}
       />
       {totalFeedback == 0 && <Notification />}
-      <Feedback
-        totalFeedback={totalFeedback}
-        feedbackType={feedbackType}
-        positivePercentage={positivePercentage}
-      />
+      {totalFeedback > 0 && (
+        <Feedback
+          totalFeedback={totalFeedback}
+          feedbackType={feedbackType}
+          positivePercentage={positivePercentage}
+        />
+      )}
     </>
   );
 }
